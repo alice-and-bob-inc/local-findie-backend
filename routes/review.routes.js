@@ -11,6 +11,7 @@ router.get("/businesses/:businessId/reviews", (req, res, next) => {
     const { businessId } = req.params;
 
     Review.find({business: businessId})
+        .populate("author", {name: 1})
         .then((reviewsFromDB) => {
             res.status(200).json(reviewsFromDB)
             console.log("Succesfully found reviews with businessId!")
