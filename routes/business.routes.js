@@ -27,7 +27,7 @@ router.get("/businesses/:businessId", (req, res, next) => {
       res.status(200).json(businessFromDB)
       console.log("Succesfully found single business!")
     })
-    .catch(() => {
+    .catch((error) => {
       res.status(500).json({message: "uh oh..", error})
       console.log("uh oh.. failed finding business with specific id", error)
     })
@@ -44,7 +44,7 @@ router.post("/businesses", isAuthenticated, (req, res, next) => {
       res.status(201).json(createdBusinessFromDB)
       console.log("Succesfully created business!")
     })
-    .catch(() => {
+    .catch((error) => {
       res.status(500).json({message: "uh oh..", error})
       console.log("uh oh.. failed creating new business", error)
     })
@@ -63,7 +63,7 @@ router.put("/businesses/:businessId", isAuthenticated, (req, res, next) => {
       res.status(200).json(updatedBusinessFromDB)
       console.log("Succesfully updated business!")
     })
-    .catch(() => {
+    .catch((error) => {
       res.status(500).json({message: "uh oh..", error})
       console.log("uh oh.. failed updating business", error)
     })
@@ -79,7 +79,7 @@ router.delete("/businesses/:businessId", isAuthenticated, (req, res, next) => {
       res.status(200).json({message: "Succesfuly deleted business"})
       console.log("Succesfully deleted business!")
     })
-    .catch(() => {
+    .catch((error) => {
       res.status(500).json({message: "uh oh..", error})
       console.log("uh oh.. failed deleting business", error)
     })

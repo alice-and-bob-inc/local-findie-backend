@@ -15,7 +15,7 @@ router.get("/businesses/:businessId/reviews", (req, res, next) => {
             res.status(200).json(reviewsFromDB)
             console.log("Succesfully found reviews with businessId!")
         })
-        .catch(() => {
+        .catch((error) => {
             res.status(500).json({message: "uh oh..", error})
             console.log("uh oh.. failed fetching reviews with businessId: ", error)
           })
@@ -34,7 +34,7 @@ router.post("/businesses/:businessId/reviews", isAuthenticated, (req, res, next)
             console.log("Succesfully created new review!");
             
         })
-        .catch(() => {
+        .catch((error) => {
             res.status(500).json({message: "uh oh..", error})
             console.log("uh oh.. failed creating review: ", error)
           })

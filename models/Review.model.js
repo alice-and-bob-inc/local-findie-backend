@@ -16,12 +16,14 @@ const reviewSchema = new Schema({
         max: 5,
     },
     author: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: "User",
+        required: true
     },
     business: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: "Business",
+        required: true
     },
 })
 
