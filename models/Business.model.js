@@ -17,7 +17,10 @@ const businessSchema = new Schema({
         enum: ["restaurant", "bookstore", "coffeeshop", "arcade", "fair"],
     },
     foundedYear: Number,
-    openingHours: [String],
+    openingHours: { 
+        type: Map,
+        of: String,
+    }
 })
 
 const Business = model("Business", businessSchema);
