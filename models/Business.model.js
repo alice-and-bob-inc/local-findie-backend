@@ -6,6 +6,10 @@ const businessSchema = new Schema({
         required: true,
     },
     imageURL: String,
+    websiteURL:{
+        type: String,
+        lowercase: true,
+    },
     description: String,
     location:{
         type: String,
