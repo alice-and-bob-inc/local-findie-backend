@@ -2,6 +2,7 @@ const express = require("express");
 const Business = require("../models/Business.model");
 const { isAuthenticated } = require("../middleware/jwt.middleware");
 const router = express.Router();
+const fileUploader = require("../config/cloudinary.config");
 
 
 // GET request for all businesses
@@ -83,6 +84,17 @@ router.delete("/businesses/:businessId", isAuthenticated, (req, res, next) => {
       res.status(500).json({message: "uh oh..", error})
       console.log("uh oh.. failed deleting business", error)
     })
+});
+
+// POST request for image upload /api/upload
+router.post("/upload", fileUploader.single("imageURL"), (req, res, next) => {
+  if(!req.file){
+    next(new Error("No file uploaded"));
+    return;
+  }
+
+  console.log(req)
+  res.json({ fileURL: req.file.path });
 });
 
 
