@@ -77,7 +77,7 @@ router.delete("/businesses/:businessId", isAuthenticated, (req, res, next) => {
 
   Business.deleteOne({_id: businessId})
     .then(() => {
-      res.status(200).json({message: "Succesfuly deleted business"})
+      res.status(200).json({message: "Succesfully deleted business"})
       console.log("Succesfully deleted business!")
     })
     .catch((error) => {

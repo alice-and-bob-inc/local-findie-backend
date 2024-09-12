@@ -11,7 +11,7 @@ router.get("/businesses/:businessId/reviews", (req, res, next) => {
     const { businessId } = req.params;
 
     Review.find({business: businessId})
-        .populate("author", {name: 1, _id: 0})
+        .populate("author", {name: 1, _id: 1})
         .then((reviewsFromDB) => {
             res.status(200).json(reviewsFromDB)
             console.log("Succesfully found reviews with businessId!")
@@ -39,6 +39,21 @@ router.post("/businesses/:businessId/reviews", isAuthenticated, (req, res, next)
             res.status(500).json({message: "uh oh..", error})
             console.log("uh oh.. failed creating review: ", error)
           })
-})
+});
+
+// DELETE request for specific review
+router.delete("/businesses/:businessId/reviews/:reviewId", isAuthenticated, (req, res, next) => {
+    const { reviewId } = req.params;
+
+    Review.deleteOne({_id: reviewId})
+        .then(() => {
+            res.status(200).json({message: "Succesfully deleted review"})
+            console.log("Succesfully deleted review")
+        })
+        .catch((error) => {
+            res.status(500).json({message: "uh oh..", error})
+            console.log("uh oh... failed to delete business", error)
+        })
+});
 
 module.exports = router;
