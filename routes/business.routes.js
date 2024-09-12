@@ -37,8 +37,8 @@ router.get("/businesses/:businessId", (req, res, next) => {
 
 // POST request for a new business
 router.post("/businesses", isAuthenticated, (req, res, next) => {
-  const { name, imageURL, description, location, category, foundedYear, websiteURL, openingHours } = req.body;
-  const newBusiness = { name, imageURL, description, location, category, foundedYear, websiteURL, openingHours }
+  const { name, imageURL, description, location, category, foundedYear, websiteURL, openingHours, user } = req.body;
+  const newBusiness = { name, imageURL, description, location, category, foundedYear, websiteURL, openingHours, user }
 
   Business.create(newBusiness)
     .then((createdBusinessFromDB) => {
@@ -54,8 +54,8 @@ router.post("/businesses", isAuthenticated, (req, res, next) => {
 
 // PUT request for updating a business
 router.put("/businesses/:businessId", isAuthenticated, (req, res, next) => {
-  const { name, imageURL, description, location, category, foundedYear, websiteURL, openingHours } = req.body;
-  const updatedBusiness = { name, imageURL, description, location, category, foundedYear, websiteURL, openingHours }
+  const { name, imageURL, description, location, category, foundedYear, websiteURL, openingHours, user } = req.body;
+  const updatedBusiness = { name, imageURL, description, location, category, foundedYear, websiteURL, openingHours, user }
 
   const { businessId } = req.params;
 

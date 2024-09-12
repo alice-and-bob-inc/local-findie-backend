@@ -24,6 +24,11 @@ const businessSchema = new Schema({
     openingHours: { 
         type: Map,
         of: String,
+    },
+    user: {
+        type: Schema.Types.ObjectId,
+        ref: "User",
+        required: true
     }
 })
 
