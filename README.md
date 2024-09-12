@@ -66,11 +66,11 @@ The backend API will be listening on http://localhost:5005
 
 | HTTP verb   | Path | Request Headers | Request body  | Description |
 | ------------- | ------------- | ------------- |------------- | ------------- |
-| POST  | /api/businesses  | Authorization: Bearer `<jwt>`  | { name: String, description: String }  | Create new business  |
+| POST  | /api/businesses  | Authorization: Bearer `<jwt>`  | { name: String, location: String, category: String, user: ObjectId }  | Create new business  |
 | GET  | /api/businesses  | –  | –  | Get all businesses  |
 | GET  | /api/businesses/:businessId  | –  | – | Get business details  |
-| PUT  | /api/businesses/:businessId  | Authorization: Bearer `<jwt>`  | { name: String, description: String, user: ObjectId }  | Update a business  |
-| DELETE  | /api/businesses/:businessId  | Authorization: Bearer `<jwt>`  | – | Delete a business  |
+| PUT  | /api/businesses/:businessId  | Authorization: Bearer `<jwt>`  | { name: String, location: String, category: String, user: ObjectId }  | Update a business  |
+| DELETE  | /api/businesses/:businessId  | Authorization: Bearer `<jwt>`  | –  | Delete a business  |
 
 
 <br/>
@@ -79,8 +79,9 @@ The backend API will be listening on http://localhost:5005
 
 | HTTP verb   | Path | Request Headers | Request body  | Description |
 | ------------- | ------------- | ------------- |------------- | ------------- |
-| POST  | /api/businesses/:businessId/reviews  | Authorization: Bearer `<jwt>`  | { title: String, description: String, businessId: ObjectId }  | Create new task  |
-| GET  | /api/businesses/:businessId/reviews  | –  | –  | Get all reviews of a specific business  |
+| POST  | /api/businesses/:businessId/reviews  | Authorization: Bearer `<jwt>`  | { title: String, text: String, rating: String, author: ObjectId, businessId: ObjectId }  | Create new review  |
+| GET  | /api/businesses/:businessId/reviews  | Authorization: Bearer `<jwt>`  | –  | Get all reviews of a specific business  |
+| DELETE  | /api/businesses/:businessId/reviews/:reviewId  | Authorization: Bearer `<jwt>`  | –  | Delete a review  |
 
 
 ## Demo
