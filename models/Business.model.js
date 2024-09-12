@@ -18,7 +18,22 @@ const businessSchema = new Schema({
     category:{
         type: String,
         required: true,
-        enum: ["restaurant", "bookstore", "coffeeshop", "arcade", "fair"],
+        enum: [
+            "arcade",
+            "bakery",
+            "bookstore",
+            "coffeeshop",
+            "fair",
+            "fitness center",
+            "garden center",
+            "hotel",
+            "movie theater",
+            "nightclub",
+            "restaurant",
+            "retail store",
+            "supermarket",
+            "wellness center"
+        ],
     },
     foundedYear: Number,
     openingHours: { 
