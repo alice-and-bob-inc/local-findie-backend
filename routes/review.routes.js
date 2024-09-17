@@ -6,6 +6,21 @@ const router = express.Router();
 
 
 
+// GET request for all reviews
+router.get("/reviews", (req, res, next) => {
+
+    Review.find({})
+        .populate("business", {_id: 1})
+        .then((reviewsFromDB) => {
+            res.status(200).json(reviewsFromDB)
+            console.log("Succesfully found reviews!")
+        })
+        .catch((error) => {
+            res.status(500).json({message: "uh oh..", error})
+            console.log("uh oh.. failed fetching reviews: ", error)
+          })
+});
+
 // GET request for reviews with businessId
 router.get("/businesses/:businessId/reviews", (req, res, next) => {
     const { businessId } = req.params;
@@ -21,7 +36,6 @@ router.get("/businesses/:businessId/reviews", (req, res, next) => {
             console.log("uh oh.. failed fetching reviews with businessId: ", error)
           })
 });
-
 
 // POST request for review
 router.post("/businesses/:businessId/reviews", isAuthenticated, (req, res, next) => {
