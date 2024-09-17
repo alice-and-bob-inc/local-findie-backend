@@ -19,7 +19,7 @@ router.get("/businesses", (req, res, next) => {
   })
 });
 
-// GET request for specific business
+// GET request for specific business based on businessId
 router.get("/businesses/:businessId", (req, res, next) => {
   const { businessId } = req.params;
 
@@ -27,6 +27,21 @@ router.get("/businesses/:businessId", (req, res, next) => {
     .then((businessFromDB) => {
       res.status(200).json(businessFromDB)
       console.log("Succesfully found single business!")
+    })
+    .catch((error) => {
+      res.status(500).json({message: "uh oh..", error})
+      console.log("uh oh.. failed finding business with specific id", error)
+    })
+});
+
+// GET request for specific business based on userId
+router.get("/businesses/user/:userId", (req, res, next) => {
+  const { userId } = req.params;
+
+  Business.find({user: userId})
+    .then((businessFromDB) => {
+      res.status(200).json(businessFromDB)
+      console.log("Succesfully found businesses with userId!")
     })
     .catch((error) => {
       res.status(500).json({message: "uh oh..", error})

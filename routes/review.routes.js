@@ -21,6 +21,22 @@ router.get("/reviews", (req, res, next) => {
           })
 });
 
+// GET request for reviews based on user Id
+router.get(`/reviews/user/:userId`, (req, res, next) => {
+    const { userId } = req.params;
+
+    Review.find({author: userId})
+        .populate("business", {_id: 1, name: 1, location: 1, category: 1})
+        .then((reviewsFromDB) => {
+            res.status(200).json(reviewsFromDB)
+            console.log("Succesfully found reviews with userId!")
+        })
+        .catch((error) => {
+            res.status(500).json({message: "uh oh..", error})
+            console.log("uh oh.. failed fetching reviews with userId: ", error)
+          })
+});
+
 // GET request for reviews with businessId
 router.get("/businesses/:businessId/reviews", (req, res, next) => {
     const { businessId } = req.params;
