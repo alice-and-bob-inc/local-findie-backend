@@ -77,7 +77,7 @@ router.put("/businesses/:businessId", isAuthenticated, (req, res, next) => {
   Business.findOneAndUpdate({_id: businessId}, updatedBusiness, {new: true})
     .then((updatedBusinessFromDB) => {
       res.status(200).json(updatedBusinessFromDB)
-      console.log("Succesfully updated business!")
+      console.log("Successfully updated business!")
     })
     .catch((error) => {
       res.status(500).json({message: "uh oh..", error})

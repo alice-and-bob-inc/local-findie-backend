@@ -18,6 +18,13 @@ const userSchema = new Schema(
       type: String,
       required: [true, "Name is required."],
     },
+    favourites:{
+      type: [Schema.Types.ObjectId],
+      ref: "Business",
+    },
+    imageURL:{
+      type: String,
+    },
   },
   {
     // this second object adds extra properties: `createdAt` and `updatedAt`

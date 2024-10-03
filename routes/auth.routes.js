@@ -128,4 +128,41 @@ router.get("/verify", isAuthenticated, (req, res, next) => {
   res.status(200).json(req.payload);
 });
 
+// GET /auth/user/:userId - Used to receive favourited businesses and profile picture from DB
+router.get("/user/:userId", isAuthenticated, (req, res, next) => {
+  const { userId } = req.params;
+  
+  User.findById(userId)
+    .then((userFromDB) => {
+      const { favourites, imageURL } = userFromDB;
+      const userToSendToFE = { favourites, imageURL };
+      console.log(userToSendToFE)
+      res.status(200).json(userToSendToFE);
+    })
+    .catch((error) => {
+      res.status(500).json({message: "uh oh..", error})
+      console.log("uh oh... failed to get user", error)
+    })
+})
+
+// PUT /auth/user/:userId - Used to upload profile picture and post favourite businesses
+router.put("/user/:userId", isAuthenticated, (req, res, next) => {
+  const { userId } = req.params;
+  const { imageURL, favourites } = req.body;
+  const updatedUser = { imageURL, favourites };
+
+  User.findByIdAndUpdate({_id: userId}, updatedUser, {new: true})
+    .then((updatedUserFromDB) => {
+      const { favourites, imageURL } = updatedUserFromDB;
+      const userToSendToFE = { favourites, imageURL };
+      res.status(200).json(userToSendToFE)
+      console.log("Successfully updated user!")
+    })
+    .catch((error) => {
+      res.status(500).json({message: "uh oh..", error})
+      console.log("uh oh... failed to update user", error)
+    })
+});
+
+
 module.exports = router;
