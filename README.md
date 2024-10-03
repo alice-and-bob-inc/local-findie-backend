@@ -1,10 +1,11 @@
-# Local Findie - Local Business Directory - Server
+# Local Findie - Local Business Directory - Backend (Express API)
 
 ## Description
 
 Local Findie is a full-stack web application that helps users discover, review, and interact with local businesses. Users can search for businesses and leave reviews. The app provides search filters, making it easier to find businesses like restaurants, shops, or services in a specific area.
 
-This project is built with a React frontend and a Node.js/Express backend using MongoDB for data storage. It includes full CRUD functionality for businesses.
+THIS BACKEND is built with Node.js/Express using MongoDB for data storage.
+
 
 You will find the Frontend Repository with the setup instructions, here:
 
@@ -12,15 +13,8 @@ You will find the Frontend Repository with the setup instructions, here:
 https://github.com/alice-and-bob-inc/local-findie-frontend.git
 ```
 
-## Features
 
-- Users can sign up, log in, and log out.
-- Businesses can be created, updated, and deleted by users.
-- Users can search and filter businesses with key words.
-- Users can leave reviews and rate businesses.
-
-
-## Instructions to Run the App - Backend
+## Instructions to Run the App - Backend (Express API)
 
 1. Clone the Backend Repository
 
@@ -54,3 +48,42 @@ npm run dev
 
 The backend API will be listening on http://localhost:5005
 
+
+## API Endpoints
+
+**Auth endpoints**
+
+| HTTP verb   | Path | Request Headers | Request body  | Description |
+| ------------- | ------------- | ------------- |------------- | ------------- |
+| POST  | /auth/signup  | –  | { email: String, password: String }  | Create an account  |
+| POST  | /auth/login  | –  | { email: String, password: String }  | Login  |
+| GET  | /auth/verify  | Authorization: Bearer `<jwt>`  | –  | Verify jwt  |
+
+
+<br/>
+
+**Businesses**
+
+| HTTP verb   | Path | Request Headers | Request body  | Description |
+| ------------- | ------------- | ------------- |------------- | ------------- |
+| POST  | /api/businesses  | Authorization: Bearer `<jwt>`  | { name: String, location: String, category: String, user: ObjectId }  | Create new business  |
+| GET  | /api/businesses  | –  | –  | Get all businesses  |
+| GET  | /api/businesses/:businessId  | –  | – | Get business details  |
+| PUT  | /api/businesses/:businessId  | Authorization: Bearer `<jwt>`  | { name: String, location: String, category: String, user: ObjectId }  | Update a business  |
+| DELETE  | /api/businesses/:businessId  | Authorization: Bearer `<jwt>`  | –  | Delete a business  |
+
+
+<br/>
+
+**Reviews**
+
+| HTTP verb   | Path | Request Headers | Request body  | Description |
+| ------------- | ------------- | ------------- |------------- | ------------- |
+| POST  | /api/businesses/:businessId/reviews  | Authorization: Bearer `<jwt>`  | { title: String, text: String, rating: String, author: ObjectId, businessId: ObjectId }  | Create new review  |
+| GET  | /api/businesses/:businessId/reviews  | Authorization: Bearer `<jwt>`  | –  | Get all reviews of a specific business  |
+| DELETE  | /api/businesses/:businessId/reviews/:reviewId  | Authorization: Bearer `<jwt>`  | –  | Delete a review  |
+
+
+## Demo
+
+You can see [here](https://local-findie.netlify.app/) the live version of the project on Netlify.
